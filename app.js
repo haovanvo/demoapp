@@ -1,10 +1,59 @@
 const http = require('http');
-const route = require('routes');
+const Router = require('router');
+var finalhandler = require('finalhandler')
+var bodyParser = require('body-parser')
+
+const UserController = require('./userAPI');
+const CourseController = require('./courseAPI');
+
 
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-route.add('/user/', );
+var opts = { mergeParams: true }
+
+var router = new Router(opts);
+var api = new Router();
+
+var userapi = new Router();
+var courseapi = new Router();
+
+var userService = new UserController();
+var courseService = new CourseController();
+
+router.use('/api/', api);
+api.use('/user/', userapi);
+api.use('/course/', courseapi);
+
+api.use(bodyParser.json());
+userapi.use(bodyParser.json());
+courseapi.use(bodyParser.json());
+
+//sign in api
+//POST /api/signin
+//POST DATA: { "userName": "", "password": "" }
+api.post('/signin', function (req, res) {
+  userService.SignIn(req, res);
+});
+
+//get user profile
+//GET /api/user
+userapi.get('/', function (req, res) {
+  userService.UserProfile(req, res);
+});
+
+//sign up user
+//POST /api/user
+//POST DATA: { "UserName": "", "Password": "", "FullName": "", "Email": "" }
+userapi.post('/', function (req, res) {
+  userService.SignUp(req, res);
+});
+
+//get all courses
+//GET /api/course
+courseapi.get('/', function (req, res) {
+  courseService.GetAll(req, res);
+});
 
 const server = http.createServer((req, res) => {
 
@@ -16,37 +65,14 @@ const server = http.createServer((req, res) => {
     console.error(err);
   });
 
-  switch (req.method) {
-    case 'GET':
-      if (req.url.match(/\/user\/\d+/g)) {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        var jsonData = {
-          id: '1',
-          user: 'hvo21',
-          pwd: 'Test123',
-          displayName: 'Hao Van Vo'
-        };
-        res.end(JSON.stringify(jsonData));
-        console.log(JSON.stringify(jsonData));
-      } else {
-        res.statusCode = 404;
-        res.setHeader('Content-Type', 'text/xml');
-        res.end('API is not found!');
-      }
-      break;
-
-    case 'POST':
-      break;
-
-    case 'PUT':
-      break;
-
-    case 'DELETE':
-      break;
-  }
+  router(req, res, finalhandler(req, res));
 });
 
-server.listen(port, hostname, () => {
+
+server.listen(port,()=>{
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+// server.listen(port, hostname, () => {
+//   console.log(`Server running at http://${hostname}:${port}/`);
+// });
