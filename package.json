@@ -2,9 +2,9 @@
   "name": "demoapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node index"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
