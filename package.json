@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/haovanvo/projects-mysampleApp.git"
+    "url": "git+https://github.com/haovanvo/demoapp.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/haovanvo/projects-mysampleApp/issues"
+    "url": "https://github.com/haovanvo/demoapp/issues"
   },
-  "homepage": "https://github.com/haovanvo/projects-mysampleApp#readme",
+  "homepage": "https://github.com/haovanvo/demoapp#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "finalhandler": "^1.1.0",
