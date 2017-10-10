@@ -5,29 +5,26 @@ var DBService = require('./dbAccess');
 var db = new DBService();
 
 class CourseRepository {
-    GetOne(id) {
-        return db.GetOne('course', { Id: id });
-    }
-
-    async GetOneAsync(id) {
+    GetOneAsync(id) {
         var objId = new ObjectID(id);
-        return await db.GetOneAsync('course', { "_id": objId });
+        return db.GetOneAsync('course', { "_id": objId });
     }
 
-    async FindCourseAsync(courseName){
-        return await db.GetOneAsync('course', { CourseName: courseName });
+    FindCourseAsync(courseName) {
+        return db.GetOneAsync('course', { CourseName: courseName });
     }
 
-    async GetAllAsync(){
-        return await db.AllAsync('course');
+    GetAllAsync() {
+        return db.AllAsync('course');
     }
 
-    async AddNewAsync(course) {
-        return await db.AddNewAsync('course', course);
+    AddNewAsync(course) {
+        return db.AddNewAsync('course', course);
     }
 
-    async Delete(key) {
-        return db.Delete('course', { Id: key });
+    Delete(key) {
+        var objKey = new ObjectID(key);
+        return db.DeleteAsync('course', { "_id": objKey });
     }
 }
 

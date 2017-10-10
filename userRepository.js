@@ -5,29 +5,26 @@ var DBService = require('./dbAccess');
 var db = new DBService();
 
 class UserRepository {
-    GetOne(id) {
-        return db.GetOne('user', { Id: id });
-    }
-
-    async GetOneAsync(id) {
+    GetOneAsync(id) {
         var objId = new ObjectID(id);
-        return await db.GetOneAsync('user', { "_id": objId });
+        return db.GetOneAsync('user', { "_id": objId });
     }
 
-    async FindUserAsync(userName){
-        return await db.GetOneAsync('user', { $or: [{ UserName: userName }, { Email: userName }] });
+    FindUserAsync(userName){
+        return db.GetOneAsync('user', { $or: [{ UserName: userName }, { Email: userName }] });
     }
 
-    async GetAll(){
-        return db.All('user');
+    GetAll(){
+        return db.AllAsync('user');
     }
 
-    async AddNewAsync(user) {
-        return await db.AddNewAsync('user', user);
+    AddNewAsync(user) {
+        return db.AddNewAsync('user', user);
     }
 
-    async Delete(key) {
-        return db.Delete('user', { Id: key });
+    DeleteAsync(key) {
+        var objKey = new ObjectID(key);
+        return db.DeleteAsync('user', { "_id": objKey });
     }
 }
 

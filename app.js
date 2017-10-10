@@ -49,6 +49,12 @@ userapi.post('/', function (req, res) {
   userService.SignUp(req, res);
 });
 
+//delete user
+//DELETE /api/user/<userName>
+userapi.delete('/:userName', function (req, res) {
+  userService.DeleteUser(req, res);
+});
+
 //get all courses
 //GET /api/course
 courseapi.get('/', function (req, res) {

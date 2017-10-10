@@ -4,9 +4,10 @@ var CourseRepository = require('./courseRepository');
 var courseRepo = new CourseRepository();
 
 class CourseController {
-    async GetAll(req, res) {
-        var courses = await courseRepo.GetAllAsync();
-        res.end(JSON.stringify(courses));
+    GetAll(req, res) {
+        courseRepo.GetAllAsync().then((courses) => {
+            res.end(JSON.stringify(courses));
+        });
     }
 }
 
