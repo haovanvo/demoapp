@@ -14,7 +14,7 @@ class UserRepository {
         return db.GetOneAsync('user', { $or: [{ UserName: userName }, { Email: userName }] });
     }
 
-    GetAll(){
+    GetAllAsync(){
         return db.AllAsync('user');
     }
  

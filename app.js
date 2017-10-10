@@ -28,6 +28,9 @@ api.use(bodyParser.json());
 userapi.use(bodyParser.json());
 courseapi.use(bodyParser.json());
 
+/*---------------------------------------------------
+DEFINE APIs OF USER
+---------------------------------------------------*/
 //sign in api
 //POST /api/signin
 //POST DATA: { "userName": "", "password": "" }
@@ -54,10 +57,32 @@ userapi.delete('/:userName', function (req, res) {
   userService.DeleteUser(req, res);
 });
 
+/*---------------------------------------------------
+DEFINE APIs OF COURSE
+---------------------------------------------------*/
 //get all courses
 //GET /api/course
 courseapi.get('/', function (req, res) {
   courseService.GetAll(req, res);
+});
+
+//get course by name
+//GET /api/course/<courseName>
+courseapi.get('/:courseName', function (req, res) {
+  courseService.GetOne(req, res);
+});
+
+//add new course
+//POST /api/course
+//POST DATA: { "name": "", "price": 0.00 }
+courseapi.post('/', function (req, res) {
+  courseService.AddNew(req, res);
+});
+
+//delete course
+//DELETE /api/course/<courseName>
+courseapi.delete('/:courseName', function (req, res) {
+  courseService.Delete(req, res);
 });
 
 const server = http.createServer((req, res) => {
@@ -74,7 +99,7 @@ const server = http.createServer((req, res) => {
 });
 
 
-server.listen(port,()=>{
+server.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 

@@ -22,7 +22,7 @@ class CourseRepository {
         return db.AddNewAsync('course', course);
     }
 
-    Delete(key) {
+    DeleteAsync(key) {
         var objKey = new ObjectID(key);
         return db.DeleteAsync('course', { "_id": objKey });
     }
