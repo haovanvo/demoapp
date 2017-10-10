@@ -16,7 +16,7 @@ class DBAccess {
             }).catch((err) => { return reject(err); });
         });
     }
-
+ 
     AllAsync(collectionName) {
         return new Promise((resolve, reject) => {
             return mongoClient.connect(url).then((db) => {

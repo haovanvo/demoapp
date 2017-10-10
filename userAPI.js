@@ -16,7 +16,7 @@ class UserController {
                 res.end('Username or Password is not correct!');
                 return false;
             }
-
+ 
             res.setHeader('Authorization', user._id);
             res.end('Logged in successful!');
 

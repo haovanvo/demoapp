@@ -9,7 +9,7 @@ class CourseRepository {
         var objId = new ObjectID(id);
         return db.GetOneAsync('course', { "_id": objId });
     }
-
+ 
     FindCourseAsync(courseName) {
         return db.GetOneAsync('course', { CourseName: courseName });
     }

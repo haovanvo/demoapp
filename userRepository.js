@@ -17,7 +17,7 @@ class UserRepository {
     GetAll(){
         return db.AllAsync('user');
     }
-
+ 
     AddNewAsync(user) {
         return db.AddNewAsync('user', user);
     }
